@@ -15,7 +15,7 @@ function test(originDataSet, originOptions) {
   // defaultOptions
   var options = {
     alpha: 0.01,
-    recursion: true
+    recursion: true,
   };
   // Merge options
   if (typeof originOptions !== 'undefined') {
@@ -48,8 +48,10 @@ function test(originDataSet, originOptions) {
     currentRound.dataSet = dataSet.slice();
     currentRound.stdev = stdev(currentRound.dataSet.filter(isValidData));
     currentRound.average =
-      Math.round(average(currentRound.dataSet.filter(isValidData)) * powDigit) / powDigit;
-    currentRound.criticalValue = criticalValue[currentRound.dataSet.filter(isValidData).length];
+      Math.round(average(currentRound.dataSet.filter(isValidData)) * powDigit) /
+      powDigit;
+    currentRound.criticalValue =
+      criticalValue[currentRound.dataSet.filter(isValidData).length];
     currentRound.gSet = [];
     // true if pass, false if unpass, undefined if no data
     currentRound.gPass = [];
@@ -64,7 +66,8 @@ function test(originDataSet, originOptions) {
       if (typeof currentRound.dataSet[i] !== 'number') {
         throw new Error('data MUST be number');
       }
-      gResult = (currentRound.dataSet[i] - currentRound.average) / currentRound.stdev;
+      gResult =
+        (currentRound.dataSet[i] - currentRound.average) / currentRound.stdev;
       currentRound.gSet.push(gResult);
       if (Math.abs(gResult) > currentRound.criticalValue) {
         done = false;
@@ -82,11 +85,7 @@ function test(originDataSet, originOptions) {
 }
 
 function isValidData(data) {
-  return (
-    typeof data !== 'undefined' &&
-    !isNaN(data) &&
-    data !== null
-  );
+  return typeof data !== 'undefined' && !isNaN(data) && data !== null;
 }
 
 function getDigit(dataSet) {
@@ -109,5 +108,5 @@ function getDigit(dataSet) {
 
 module.exports = {
   test: test,
-  isValidData: isValidData
+  isValidData: isValidData,
 };

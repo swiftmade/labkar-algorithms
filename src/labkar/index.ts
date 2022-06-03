@@ -1,7 +1,7 @@
-const _ = require("lodash");
+const _ = require('lodash');
 const grubbs = require('./../grubbs');
-const jStat = require("jStat").jStat;
-const ss = require("simple-statistics");
+const jStat = require('jStat').jStat;
+const ss = require('simple-statistics');
 
 const fFactors = {
   20: [1.59, 0.57],
@@ -31,7 +31,7 @@ function G(i, h, hPrevious) {
 }
 
 module.exports = {
-  outliers: function(results, alpha = 0.01) {
+  outliers: function (results, alpha = 0.01) {
     const options = {
       alpha,
     };
@@ -43,7 +43,7 @@ module.exports = {
       });
     }
 
-    let t = grubbs.test(_.map(results, "result"), options);
+    let t = grubbs.test(_.map(results, 'result'), options);
     const outliers = _.reduce(
       t,
       (all, iteration) => {
@@ -58,9 +58,9 @@ module.exports = {
     });
   },
 
-  q: function(results, precision = 8) {
-    const sortedResults = _.sortBy(results, "result");
-    const values = _.map(sortedResults, "result");
+  q: function (results, precision = 8) {
+    const sortedResults = _.sortBy(results, 'result');
+    const values = _.map(sortedResults, 'result');
 
     let deltas = [];
 
@@ -81,7 +81,7 @@ module.exports = {
     for (let i = 0; i < sortedUniqueDeltas.length; i++) {
       const value = sortedUniqueDeltas[i];
       const frequency = _.filter(sortedDeltas, (v) => v === value).length;
-      const cumFrequency = _.sumBy(calculations, "frequency") + frequency;
+      const cumFrequency = _.sumBy(calculations, 'frequency') + frequency;
       const h1 = cumFrequency * hMultiplier;
 
       calculations.push({
@@ -89,7 +89,7 @@ module.exports = {
         value,
         frequency,
         cumFrequency,
-        g: G(i, h1, _.get(calculations, i - 1 + ".h1")),
+        g: G(i, h1, _.get(calculations, i - 1 + '.h1')),
       });
     }
 
@@ -113,12 +113,12 @@ module.exports = {
     let q = gInverse / (Math.sqrt(2) * inverseF);
     return parseFloat(q.toFixed(4));
   },
-  hampel: function(results, q) {
+  hampel: function (results, q) {
     if (q === 0) {
       return 0;
     }
-    const sortedResults = _.sortBy(results, "result");
-    const values = _.map(sortedResults, "result");
+    const sortedResults = _.sortBy(results, 'result');
+    const values = _.map(sortedResults, 'result');
 
     const findWi = (qi) => {
       qi = Math.abs(qi);
@@ -147,7 +147,7 @@ module.exports = {
         };
       });
 
-      let wiValueWi = _.sumBy(iteration, "wiValue") / _.sumBy(iteration, "wi");
+      let wiValueWi = _.sumBy(iteration, 'wiValue') / _.sumBy(iteration, 'wi');
       let error = (0.01 * q) / Math.sqrt(values.length);
 
       if (Math.abs(wiValueWi - x) >= error) {

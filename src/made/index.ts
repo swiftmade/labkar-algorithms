@@ -1,4 +1,4 @@
-import { standardDeviation, median } from "simple-statistics";
+import { standardDeviation, median } from 'simple-statistics';
 
 function Mestimator(arr: number[], x: number) {
   var sumSeries = 0;
@@ -17,4 +17,4 @@ function calculateUvalue(arr: number[]) {
   return result;
 }
 
-export { calculateUvalue }; 
+export { calculateUvalue };
