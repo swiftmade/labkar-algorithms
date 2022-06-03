@@ -1,4 +1,4 @@
-module.exports = {
+const criticalValueTable: Record<number, Record<number, number>> = {
   0.01: {
     3: 1.155,
     4: 1.496,
@@ -80,3 +80,5 @@ module.exports = {
     40: 3.036,
   },
 };
+
+export default criticalValueTable;
