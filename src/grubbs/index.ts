@@ -1,10 +1,21 @@
 import { average, standardDeviation } from 'simple-statistics';
 import criticalValueTable from './criticalValueTable';
 
-export function Grubbs(
+export type GrubbsResult = {
+  average: number;
+  criticalValue: number;
+  dataSet: number[];
+  gPass: boolean[];
+  gSet: number[];
+  outlierIndexes: number[];
+  outliers: number[];
+  stdev: number[];
+};
+
+export function grubbs(
   originDataSet: number[],
   originOptions: { alpha: number }
-) {
+): GrubbsResult[] {
   if (typeof originDataSet === 'undefined') {
     throw new Error('dataSet MUST be passed');
   }
@@ -37,10 +48,10 @@ export function Grubbs(
   var powDigit = Math.pow(10, digit);
 
   // Main algorithm
-  var result = [];
+  var result: GrubbsResult[] = [];
   var done = false;
   var dataSet: (number | undefined)[] = originDataSet.slice();
-  var currentRound: Record<string, any> = {};
+  var currentRound: any = {};
   var i;
   var gResult;
   // If no outlier, done
@@ -109,8 +120,3 @@ function getDigit(dataSet: any) {
   });
   return digit;
 }
-
-module.exports = {
-  test: test,
-  isValidData: isValidData,
-};
