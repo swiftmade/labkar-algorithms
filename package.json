@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx tsc && node dist/index.js",
-    "start:dev": "npx tsc -w & nodemon -q -w dist dist/index.js",
     "test": "jest",
+    "test:watch": "jest --watchAll",
     "build": "tsc"
   },
   "dependencies": {
