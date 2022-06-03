@@ -1,5 +1,5 @@
 on: push
-name: Test Client
+name: Run Tests
 jobs:
   run-tests:
     runs-on: ubuntu-latest
