@@ -12,7 +12,7 @@
   "dependencies": {
     "average": "^1.0.0",
     "compute-stdev": "^1.0.0",
-    "jStat": "^1.8.6",
+    "jstat": "^1.9.5",
     "lodash": "^4.17.21",
     "simple-statistics": "^7.7.5"
   },

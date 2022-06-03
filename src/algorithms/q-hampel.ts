@@ -1,4 +1,4 @@
-const jStat = require('jStat').jStat;
+const { jStat } = require('jstat');
 import { median } from 'simple-statistics';
 import { get, sortBy, sumBy, round, sortedUniq, findIndex } from 'lodash';
 
