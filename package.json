@@ -12,7 +12,7 @@
   "dependencies": {
     "average": "^1.0.0",
     "compute-stdev": "^1.0.0",
-    "jstat": "^1.9.5",
+    "jStat": "^1.8.6",
     "lodash": "^4.17.21",
     "simple-statistics": "^7.7.5"
   },
@@ -21,6 +21,7 @@
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-typescript": "^7.17.12",
     "@types/jest": "^28.1.0",
+    "@types/lodash": "^4.14.182",
     "babel-jest": "^28.1.0",
     "jest": "^28.1.0",
     "nodemon": "^2.0.16",

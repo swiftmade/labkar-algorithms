@@ -1,8 +1,10 @@
-var stdev = require('compute-stdev');
-var average = require('average');
-var criticalValueTable = require('./criticalValueTable');
+import { average, standardDeviation } from 'simple-statistics';
+import criticalValueTable from './criticalValueTable';
 
-function test(originDataSet, originOptions) {
+export function Grubbs(
+  originDataSet: number[],
+  originOptions: { alpha: number }
+) {
   if (typeof originDataSet === 'undefined') {
     throw new Error('dataSet MUST be passed');
   }
@@ -37,8 +39,8 @@ function test(originDataSet, originOptions) {
   // Main algorithm
   var result = [];
   var done = false;
-  var dataSet = originDataSet.slice();
-  var currentRound = {};
+  var dataSet: (number | undefined)[] = originDataSet.slice();
+  var currentRound: Record<string, any> = {};
   var i;
   var gResult;
   // If no outlier, done
@@ -46,7 +48,9 @@ function test(originDataSet, originOptions) {
     done = true;
     currentRound = {};
     currentRound.dataSet = dataSet.slice();
-    currentRound.stdev = stdev(currentRound.dataSet.filter(isValidData));
+    currentRound.stdev = standardDeviation(
+      currentRound.dataSet.filter(isValidData)
+    );
     currentRound.average =
       Math.round(average(currentRound.dataSet.filter(isValidData)) * powDigit) /
       powDigit;
@@ -84,17 +88,17 @@ function test(originDataSet, originOptions) {
   return result;
 }
 
-function isValidData(data) {
+function isValidData(data: any) {
   return typeof data !== 'undefined' && !isNaN(data) && data !== null;
 }
 
-function getDigit(dataSet) {
+function getDigit(dataSet: any) {
   if (!dataSet) return 0;
   var filteredDataSet = dataSet.filter(isValidData);
   var filteredDataSetLength = filteredDataSet.length;
   if (filteredDataSetLength === 0) return 0;
   var digit = 0;
-  filteredDataSet.forEach(function (data) {
+  filteredDataSet.forEach(function (data: any) {
     var dataString = data.toString();
     var dotIndex = dataString.indexOf('.');
     if (dotIndex === -1) return;
