@@ -76,7 +76,7 @@ export function QHampel(
 
   return {
     value,
-    uncertainty: hampel(results, value),
+    hampel: hampel(results, value),
   };
 }
 
