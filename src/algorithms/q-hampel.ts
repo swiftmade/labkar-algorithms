@@ -2,7 +2,7 @@ const { jStat } = require('jstat');
 import { median } from 'simple-statistics';
 import { get, sortBy, sumBy, round, sortedUniq, findIndex } from 'lodash';
 
-import { Result } from '../types';
+import { QHampelResult } from '../types';
 
 interface Q_Options {
   precision: number;
@@ -19,7 +19,7 @@ interface Q_Calculation {
 export function QHampel(
   results: number[],
   options: Q_Options = { precision: 8 }
-): Result {
+): QHampelResult {
   const { precision } = options;
 
   const values: number[] = ([] as number[]).concat(results).sort();

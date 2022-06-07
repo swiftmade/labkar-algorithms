@@ -9,5 +9,6 @@ export function MADe(values: number[]): Result {
     medianArr.push(value);
   });
   var result = 1.483 * median(medianArr);
-  return { value: result };
+  var u = (1.25 * result) / Math.sqrt(values.length);
+  return { value: result, uncertainty: u };
 }

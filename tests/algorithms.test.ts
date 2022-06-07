@@ -4,7 +4,7 @@ describe('Algorithms', () => {
   it('MADe Method', () => {
     const samples = [13.9, 14.12, 13.65];
     const output = MADe(samples);
-    expect(output.value).toBeCloseTo(0.32626);
+    expect(output.value).toBeCloseTo(0.32626, 3);
   });
 
   it('M-Estimator Method', () => {
@@ -13,8 +13,8 @@ describe('Algorithms', () => {
     ];
     const output = M_Estimator(samples);
 
-    expect(output.value).toBeCloseTo(3.099415);
-    expect(output.uncertainty).toBeCloseTo(1.118405);
+    expect(output.value).toBeCloseTo(3.099415, 3);
+    expect(output.uncertainty).toBeCloseTo(1.118405, 3);
   });
 
   it('Q-Hampel Method', () => {
@@ -30,8 +30,8 @@ describe('Algorithms', () => {
 
     const output = QHampel(samples);      
 
-    expect(output.value).toBeCloseTo(5.5457);
-    expect(output.hampel).toBeCloseTo(44.722);
+    expect(output.value).toBeCloseTo(5.5457, 3);
+    expect(output.hampel).toBeCloseTo(44.722, 3);
     
   });
 });

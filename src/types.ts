@@ -1,5 +1,8 @@
 export type Result = {
   value: number;
-  uncertainty?: number;
-  hampel?: number;
+  uncertainty?: number;  
+};
+export type QHampelResult = {
+  value: number;  
+  hampel: number;  
 };
