@@ -1,13 +1,14 @@
 {
   "name": "labkar-algorithms",
-  "version": "1.0.1",
-  "description": "",
-  "main": "index.js",
+  "version": "1.0.2",
+  "description": "Labkar Algorithms",
+  "main": "dist/lib.js",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
     "build": "tsc"
   },
+  "files": ["dist/*.js", "dist/**/*.js"],
   "dependencies": {
     "average": "^1.0.0",
     "compute-stdev": "^1.0.0",
