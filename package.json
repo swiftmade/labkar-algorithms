@@ -1,9 +1,8 @@
 {
   "name": "labkar-algorithms",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Labkar Algorithms",
   "main": "dist/lib.js",
-  "type": "module",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
@@ -14,8 +13,6 @@
     "dist/**/*.js"
   ],
   "dependencies": {
-    "average": "^1.0.0",
-    "compute-stdev": "^1.0.0",
     "jstat": "^1.9.5",
     "lodash": "^4.17.21",
     "simple-statistics": "^7.7.5"
