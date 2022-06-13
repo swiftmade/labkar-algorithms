@@ -2,7 +2,7 @@ const { jStat } = require('jstat');
 import { median } from 'simple-statistics';
 import { get, sortBy, sumBy, round, sortedUniq, findIndex } from 'lodash';
 
-import { QHampelResult } from '../types';
+import { Result } from '../types';
 
 interface Q_Options {
   precision: number;
@@ -16,10 +16,10 @@ interface Q_Calculation {
   g: number;
 }
 
-export function QHampel(
+export function Q(
   results: number[],
   options: Q_Options = { precision: 8 }
-): QHampelResult {
+): Result {
   const { precision } = options;
 
   const values: number[] = ([] as number[]).concat(results).sort();
@@ -76,7 +76,6 @@ export function QHampel(
 
   return {
     value,
-    hampel: hampel(results, value),
   };
 }
 
@@ -90,7 +89,7 @@ function calculateG(i: number, h: number, hPrevious: number) {
   }
 }
 
-function hampel(results: number[], q: number) {
+export function Hampel(results: number[], q: number): Result {
   if (q === 0) {
     return { value: 0 };
   }
@@ -135,5 +134,7 @@ function hampel(results: number[], q: number) {
 
   let x = median(values);
 
-  return calculateRecursive(values, x);
+  return {
+    value: calculateRecursive(values, x),
+  };
 }
