@@ -4,4 +4,6 @@ export * from './algorithms/made';
 
 export * from './algorithms/q-hampel';
 
+export * from './algorithms/a-algorithm';
+
 export * from './grubbs';

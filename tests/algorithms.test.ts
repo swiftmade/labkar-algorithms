@@ -1,6 +1,14 @@
-import { MADe, M_Estimator, Q, Hampel } from '../src/lib';
+import { MADe, M_Estimator, Q, Hampel, A_Algorithm } from '../src/lib';
 
 describe('Algorithms', () => {
+
+  it('A algorithm', () => {
+    //TODO: set example data from excel.
+    const samples = [];
+    const output = A_Algorithm(samples);
+    expect(output.robust).toBeCloseTo(0.32626, 3);
+  });
+
   it('MADe Method', () => {
     const samples = [13.9, 14.12, 13.65];
     const output = MADe(samples);
