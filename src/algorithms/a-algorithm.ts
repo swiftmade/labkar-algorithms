@@ -1,10 +1,12 @@
+import { median } from 'simple-statistics';
 import { AResult } from '../types';
 
-export function A_Algorithm(values: number[]): AResult {
-  // TODO: Implement the A-Algorithm
+export function A_Algorithm(values: number[]): AResult {  
+
+  const robust = median(values); // robust value = median of the values   
 
   return {
-    robust: 0,
+    robust,
     robustDeviation: 0,
     highLimit: 0,
     lowLimit: 0,
