@@ -36,8 +36,20 @@ export function referenceValue(
 
   // find is_reference = true array element
   const referenceArray = formulae.filter((formula) => formula.is_reference); // find the reference value
-  const notReferenceArray = formulae.filter((formula) => formula.is_reference === false); // find the not reference value
-  
+  const notReferenceArray = formulae.filter(
+    (formula) => formula.is_reference === false
+  ); // find the not reference value
+
+  let rangeValue = referenceArray.filter((r) => {
+    return r.min <= x && r.max >= x;
+  });
+
+  if (rangeValue.length === 0) {
+    rangeValue = notReferenceArray.filter((r) => {
+      return r.min <= x && r.max >= x;
+    });
+  }
+
   
 
   return {
