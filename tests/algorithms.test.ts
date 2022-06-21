@@ -8,7 +8,7 @@ import {
 } from '../src/lib';
 
 describe('Algorithms', () => {
-  it('Reference Value (CASE: x value is not range)', () => {
+  it('Reference Value (CASE1: x value is not range)', () => {
     let xSample = 0.4;
     const formulaeSample = [
       {
@@ -36,6 +36,41 @@ describe('Algorithms', () => {
     const output = ReferenceValue(xSample, formulaeSample);
 
     expect(output).toBe(null);
+  });
+
+  it('Reference Value (CASE2: is not reference array)', () => {
+    let xSample = 0.4;
+    const formulaeSample = [
+      {
+        formula: '0.075*X+4.6',
+        method: 'TS EN 13132',
+        min: 60.1,
+        max: 500.0,
+        is_reference: false,
+      },
+      {
+        formula: '0.016*X+3.70 ',
+        method: 'TS EN ISO 13032',
+        min: 8.0,
+        max: 50.0,
+        is_reference: false,
+      },
+      {
+        formula: '0.6*X',
+        method: 'ASTM D381',
+        min: 1.0,
+        max: 30.0,
+        is_reference: false,
+      },
+    ];
+    let output = ReferenceValue(xSample, formulaeSample);
+    expect(output).toBe(null);
+
+    xSample = 10;
+    output = ReferenceValue(xSample, formulaeSample); // x value is range but not reference 
+
+    expect(output?.max).toBeCloseTo(6, 3);
+    expect(output?.formula).toBe('ASTM D381');
   });
 
   it('A algorithm', () => {
