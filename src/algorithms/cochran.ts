@@ -1,5 +1,6 @@
 import { CochranResult } from '../types';
 import { standardDeviation } from 'simple-statistics';
+import criticalValueTable from './../grubbs/criticalValueTable';
 
 export function Cochran(values: Array<number[]>): CochranResult {
   values = [
@@ -19,6 +20,13 @@ export function Cochran(values: Array<number[]>): CochranResult {
     [87.5, 87.6],
     [88.8, 85],
   ];
+
+  /* p -> numune sayısı  */
+  const pValue = values.length;
+
+  /* n -> yapılan tekrar,test sayısı */
+  const nValue = values[0].length;
+
   const squareDeviations = values
     .map((value) => {
       return standardDeviation(value);
@@ -31,6 +39,8 @@ export function Cochran(values: Array<number[]>): CochranResult {
   const sumOfSquareDeviations = squareDeviations.reduce((a, b) => a + b, 0);
 
   const cValue = maxDeviation / sumOfSquareDeviations;
+
+  // Look critical value table
 
   return true;
 }
