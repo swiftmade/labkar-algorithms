@@ -8,3 +8,7 @@ export type AResult = {
   highLimit: number;
   lowLimit: number;  
 };
+export type ReferenceResult = {
+  max: number;
+  formula: string;
+};
