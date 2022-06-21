@@ -1,4 +1,5 @@
 import { ReferenceResult } from '../types';
+const _ = require('lodash');
 
 export function referenceValue(
   x: number,
@@ -10,30 +11,6 @@ export function referenceValue(
     max: number; // the maximum value of the reference value
   }>
 ): ReferenceResult {
-  formulae = [
-    {
-      formula: '0.075*X+4.6',
-      method: 'TS EN 13132',
-      min: 60.1,
-      max: 500.0,
-      is_reference: true,
-    },
-    {
-      formula: '0.016*X+3.70 ',
-      method: 'TS EN ISO 13032',
-      min: 8.0,
-      max: 50.0,
-      is_reference: true,
-    },
-    {
-      formula: '0.6*X',
-      method: 'ASTM D381',
-      min: 1.0,
-      max: 30.0,
-      is_reference: false,
-    },
-  ];
-
   // find is_reference = true array element
   const referenceArray = formulae.filter((formula) => formula.is_reference); // find the reference value
   const notReferenceArray = formulae.filter(
@@ -50,10 +27,25 @@ export function referenceValue(
     });
   }
 
-  
+  const chainArray = rangeValue.map((r) => {
+    const formulaResult = eval(r.formula.replace(/X/g, x.toString()));
+    return {
+      method: r.method,
+      value: formulaResult,
+    };
+  });
+
+  const result = _.maxBy(chainArray, 'value');
+
+  if (result === undefined) {
+    return {
+      max: 0,
+      formula: '',
+    };
+  }
 
   return {
-    max: 0,
-    formula: '',
+    max: result.value,
+    formula: result.method,
   };
 }
