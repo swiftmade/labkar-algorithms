@@ -6,5 +6,10 @@ export type AResult = {
   robust: number;
   robustDeviation: number;
   highLimit: number;
-  lowLimit: number;  
+  lowLimit: number;
 };
+export type ReferenceResult = {
+  value: number;
+  method: string;
+} | null;
+export type CochranResult = true | false;
