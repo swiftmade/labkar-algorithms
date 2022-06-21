@@ -1,4 +1,4 @@
-import { MADe, M_Estimator, Q, Hampel, A_Algorithm } from '../src/lib';
+import { MADe, M_Estimator, Q, Hampel, A_Algorithm, Cochran } from '../src/lib';
 
 describe('Algorithms', () => {
   it('A algorithm', () => {
@@ -63,5 +63,29 @@ describe('Algorithms', () => {
     const output = Hampel(samples, Q(samples).value);
 
     expect(output.value).toBeCloseTo(44.722, 3);
+  });
+
+  it('Cochran Algorithm Test', () => {
+    const samples = [
+      [91, 89.6],
+      [89.7, 89.8],
+      [88, 87.5],
+      [89.2, 88.5],
+      [89, 90],
+      [88.5, 90.5],
+      [88.9, 88.2],
+      [90.1, 88.4],
+      [86, 85.8],
+      [87.6, 84.4],
+      [88.2, 87.4],
+      [91, 83.1],
+      [87.5, 87.8],
+      [87.5, 87.6],
+      [88.8, 85],
+    ];
+
+    const output = Cochran(samples);
+
+    expect(output).toBe('not-outlier');
   });
 });
