@@ -3,38 +3,39 @@ const _ = require('lodash');
 
 export function ReferenceValue(
   x: number,
-  formulae: Array<{
-    is_reference: boolean; // true if this is a reference value
-    method: string; // the method used to calculate the reference value
-    formula: string; // the formula used to calculate the reference value
-    min: number; // the minimum value of the reference value
-    max: number; // the maximum value of the reference value
+  Formula: Array<{
+    is_reference: boolean;
+    method: string;
+    formula: string;
+    min: number;
+    max: number;
   }>
 ): ReferenceResult {
-  // find is_reference = true array element
-  const referenceArray = formulae.filter((formula) => formula.is_reference);
 
-  // find the not reference value
-  const notReferenceArray = formulae.filter(
-    (formula) => formula.is_reference === false
-  );
-
-  let rangeValue = referenceArray.filter((r) => {
+  /* First, try to calculate using reference Formula */
+  const referenceArray = Formula.filter((formula) => formula.is_reference);
+  let formulaInRange = referenceArray.filter((r) => {
     return r.min <= x && r.max >= x;
   });
 
-  if (rangeValue.length === 0) {
-    rangeValue = notReferenceArray.filter((r) => {
+  /* Second, if reference value is not found, try to calculate using non-reference Formula */ 
+  if (formulaInRange.length === 0) {
+    const notReferenceArray = Formula.filter(
+      (formula) => formula.is_reference === false
+    );
+
+    formulaInRange = notReferenceArray.filter((r) => {
       return r.min <= x && r.max >= x;
     });
   }
 
   // if there is no range value both reference and not reference value are in the range of x then return null
-  if (rangeValue.length === 0) {
+  if (formulaInRange.length === 0) {
     return null;
   }
 
-  const chainArray = rangeValue.map((r) => {
+  // Lastly, calculate the value using the formula
+  const chainArray = formulaInRange.map((r) => {
     const formulaResult = eval(r.formula.replace(/X/g, x.toString()));
     return {
       method: r.method,
@@ -44,12 +45,5 @@ export function ReferenceValue(
 
   const result = _.maxBy(chainArray, 'value');
 
-  if (result === undefined) {
-    return null;
-  }
-
-  return {
-    max: result.value,
-    formula: result.method,
-  };
+  return result;
 }

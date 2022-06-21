@@ -9,8 +9,8 @@ import {
 
 describe('Algorithms', () => {
   it('Reference Value (CASE1: x value is not range)', () => {
-    let xSample = 0.4;
-    const formulaeSample = [
+    let x = 0.4;
+    const formulae = [
       {
         formula: '0.075*X+4.6',
         method: 'TS EN 13132',
@@ -33,14 +33,14 @@ describe('Algorithms', () => {
         is_reference: false,
       },
     ];
-    const output = ReferenceValue(xSample, formulaeSample);
+    const output = ReferenceValue(x, formulae);
 
     expect(output).toBe(null);
   });
 
   it('Reference Value (CASE2: is not reference array)', () => {
-    let xSample = 0.4;
-    const formulaeSample = [
+    let x = 0.4;
+    const formulae = [
       {
         formula: '0.075*X+4.6',
         method: 'TS EN 13132',
@@ -63,19 +63,19 @@ describe('Algorithms', () => {
         is_reference: false,
       },
     ];
-    let output = ReferenceValue(xSample, formulaeSample);
+    let output = ReferenceValue(x, formulae);
     expect(output).toBe(null);
 
-    xSample = 10;
-    output = ReferenceValue(xSample, formulaeSample);
+    x = 10;
+    output = ReferenceValue(x, formulae);
 
-    expect(output?.max).toBeCloseTo(6, 3);
-    expect(output?.formula).toBe('ASTM D381');
+    expect(output?.value).toBeCloseTo(6, 3);
+    expect(output?.method).toBe('ASTM D381');
   });
 
   it('Reference Value (CASE3: is reference array)', () => {
-    let xSample = 0.4;
-    const formulaeSample = [
+    let x = 0.4;
+    const formulae = [
       {
         formula: '0.075*X+4.6',
         method: 'TS EN 13132',
@@ -98,14 +98,14 @@ describe('Algorithms', () => {
         is_reference: false,
       },
     ];
-    let output = ReferenceValue(xSample, formulaeSample);
+    let output = ReferenceValue(x, formulae);
     expect(output).toBe(null);
 
-    xSample = 10;
-    output = ReferenceValue(xSample, formulaeSample);
+    x = 10;
+    output = ReferenceValue(x, formulae);
 
-    expect(output?.max).toBeCloseTo(3.86, 3);
-    expect(output?.formula).toBe('TS EN ISO 13032');
+    expect(output?.value).toBeCloseTo(3.86, 3);
+    expect(output?.method).toBe('TS EN ISO 13032');
   });
 
   it('A algorithm', () => {

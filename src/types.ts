@@ -9,6 +9,6 @@ export type AResult = {
   lowLimit: number;
 };
 export type ReferenceResult = {
-  max: number;
-  formula: string;
-} | null;
+  value: number;
+  method: string;
+} | null;
