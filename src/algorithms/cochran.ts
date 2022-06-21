@@ -3,24 +3,6 @@ import { standardDeviation } from 'simple-statistics';
 import criticalValueTable from './../grubbs/criticalValueTable';
 
 export function Cochran(values: Array<number[]>): CochranResult {
-  values = [
-    [91, 89.6],
-    [89.7, 89.8],
-    [88, 87.5],
-    [89.2, 88.5],
-    [89, 90],
-    [88.5, 90.5],
-    [88.9, 88.2],
-    [90.1, 88.4],
-    [86, 85.8],
-    [87.6, 84.4],
-    [88.2, 87.4],
-    [91, 83.1],
-    [87.5, 87.8],
-    [87.5, 87.6],
-    [88.8, 85],
-  ];
-
   /* p -> numune sayısı  */
   const pValue = values.length;
 
@@ -41,6 +23,21 @@ export function Cochran(values: Array<number[]>): CochranResult {
   const cValue = maxDeviation / sumOfSquareDeviations;
 
   // Look critical value table
+  const onePercentCriticalValue = criticalValueTable[0.01][pValue];
+  const fivePercentCriticalValue = criticalValueTable[0.05][pValue];
 
-  return true;
+  let result: 'outlier' | 'straggler' | 'not-outlier' | null = null;
+
+  if (cValue < fivePercentCriticalValue) {
+    result = 'not-outlier';
+  } else if (
+    cValue < onePercentCriticalValue &&
+    cValue > fivePercentCriticalValue
+  ) {
+    result = 'straggler';
+  } else if (cValue > onePercentCriticalValue) {
+    result = 'outlier';
+  }
+
+  return result;
 }

@@ -12,4 +12,4 @@ export type ReferenceResult = {
   value: number;
   method: string;
 } | null;
-export type CochranResult = true | false;
+export type CochranResult = 'outlier' | 'straggler' | 'not-outlier' | null;
