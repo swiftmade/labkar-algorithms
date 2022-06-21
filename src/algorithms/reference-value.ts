@@ -1,7 +1,7 @@
 import { ReferenceResult } from '../types';
 const _ = require('lodash');
 
-export function referenceValue(
+export function ReferenceValue(
   x: number,
   formulae: Array<{
     is_reference: boolean; // true if this is a reference value
@@ -27,6 +27,10 @@ export function referenceValue(
     });
   }
 
+  if (rangeValue.length === 0) {
+    return null;
+  }
+
   const chainArray = rangeValue.map((r) => {
     const formulaResult = eval(r.formula.replace(/X/g, x.toString()));
     return {
@@ -38,10 +42,7 @@ export function referenceValue(
   const result = _.maxBy(chainArray, 'value');
 
   if (result === undefined) {
-    return {
-      max: 0,
-      formula: '',
-    };
+    return null;
   }
 
   return {
