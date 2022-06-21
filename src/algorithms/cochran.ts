@@ -27,5 +27,10 @@ export function Cochran(values: Array<number[]>): CochranResult {
       return value * value;
     });
 
+  const maxDeviation = Math.max.apply(null, squareDeviations);
+  const sumOfSquareDeviations = squareDeviations.reduce((a, b) => a + b, 0);
+
+  const cValue = maxDeviation / sumOfSquareDeviations;
+
   return true;
 }
