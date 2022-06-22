@@ -1,8 +1,8 @@
-import { CochranResult } from '../types';
+import { CochranResult, CochranResultType } from '../types';
 import { standardDeviation } from 'simple-statistics';
 import criticalValueTable from './../grubbs/criticalValueTable';
 
-export function Cochran(values: Array<number[]>): CochranResult {
+export function Cochran(values: Array<number[]>): CochranResult | null {
   /* p -> numune sayısı  */
   const pValue = values.length;
 
@@ -26,18 +26,16 @@ export function Cochran(values: Array<number[]>): CochranResult {
   const onePercentCriticalValue = criticalValueTable[0.01][pValue];
   const fivePercentCriticalValue = criticalValueTable[0.05][pValue];
 
-  let result: 'outlier' | 'straggler' | 'not-outlier' | null = null;
-
   if (cValue < fivePercentCriticalValue) {
-    result = 'not-outlier';
+    return CochranResultType.NonOutlier;
   } else if (
     cValue < onePercentCriticalValue &&
     cValue > fivePercentCriticalValue
   ) {
-    result = 'straggler';
+    return CochranResultType.Straggler;
   } else if (cValue > onePercentCriticalValue) {
-    result = 'outlier';
+    return CochranResultType.Outlier;
+  }else {
+    return null;
   }
-
-  return result;
 }

@@ -8,8 +8,10 @@ export type AResult = {
   highLimit: number;
   lowLimit: number;
 };
-export type ReferenceResult = {
-  value: number;
-  method: string;
-} | null;
-export type CochranResult = 'outlier' | 'straggler' | 'not-outlier' | null;
+export enum CochranResultType {
+  Outlier = 'outlier',
+  Straggler = "straggler",
+  NonOutlier = "non-outlier"  
+};
+/* export type CochranResult = 'outlier' | 'straggler' | 'not-outlier' | null; */
+export type CochranResult = CochranResultType;
