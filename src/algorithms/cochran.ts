@@ -1,6 +1,7 @@
-import { CochranResult, CochranResultType } from '../types';
+import { get } from 'lodash';
+import { CochranResult } from '../types';
 import { standardDeviation } from 'simple-statistics';
-import cochranCriticalValues  from './cochranCriticalValues';
+import cochranCriticalValues from './cochranCriticalValues';
 
 export function Cochran(values: Array<number[]>): CochranResult | null {
   /* p -> numune sayısı  */
@@ -8,6 +9,20 @@ export function Cochran(values: Array<number[]>): CochranResult | null {
 
   /* n -> yapılan tekrar,test sayısı */
   const nValue = values[0].length;
+
+  const onePercentCriticalValue = get(
+    cochranCriticalValues,
+    `${nValue}.1%.${pValue}`
+  );
+
+  const fivePercentCriticalValue = get(
+    cochranCriticalValues,
+    `${nValue}.5%.${pValue}`
+  );
+
+  if (!onePercentCriticalValue || !fivePercentCriticalValue) {
+    return null;
+  }
 
   const squareDeviations = values
     .map((value) => {
@@ -22,20 +37,17 @@ export function Cochran(values: Array<number[]>): CochranResult | null {
 
   const cValue = maxDeviation / sumOfSquareDeviations;
 
-  // Look critical value table
-  const onePercentCriticalValue = cochranCriticalValues[nValue][0.01][pValue];
-  const fivePercentCriticalValue = cochranCriticalValues[nValue][0.05][pValue];
-
   if (cValue < fivePercentCriticalValue) {
-    return CochranResultType.NonOutlier;
-  } else if (
-    cValue < onePercentCriticalValue &&
-    cValue > fivePercentCriticalValue
-  ) {
-    return CochranResultType.Straggler;
-  } else if (cValue > onePercentCriticalValue) {
-    return CochranResultType.Outlier;
-  }else {
-    return null;
+    return CochranResult.NonOutlier;
   }
+
+  if (cValue < onePercentCriticalValue && cValue > fivePercentCriticalValue) {
+    return CochranResult.Straggler;
+  }
+
+  if (cValue > onePercentCriticalValue) {
+    return CochranResult.Outlier;
+  }
+
+  return null;
 }

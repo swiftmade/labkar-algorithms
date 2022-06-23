@@ -1,10 +1,9 @@
 const cochranCriticalValues: Record<
   number,
-  Record<number, Record<number, number>>
+  Record<string, Record<number, number>>
 > = {
   2: {
-    0.01: {
-      2: 0,
+    '1%': {
       3: 0.993,
       4: 0.968,
       5: 0.928,
@@ -44,8 +43,7 @@ const cochranCriticalValues: Record<
       39: 0.3,
       40: 0.294,
     },
-    0.05: {
-      2: 0.0,
+    '5%': {
       3: 0.967,
       4: 0.906,
       5: 0.841,
@@ -87,7 +85,7 @@ const cochranCriticalValues: Record<
     },
   },
   3: {
-    0.01: {
+    '1%': {
       2: 0.995,
       3: 0.942,
       4: 0.864,
@@ -128,7 +126,7 @@ const cochranCriticalValues: Record<
       39: 0.196,
       40: 0.192,
     },
-    0.05: {
+    '5%': {
       2: 0.975,
       3: 0.871,
       4: 0.768,
@@ -171,7 +169,7 @@ const cochranCriticalValues: Record<
     },
   },
   4: {
-    0.01: {
+    '1%': {
       2: 0.979,
       3: 0.883,
       4: 0.781,
@@ -212,7 +210,7 @@ const cochranCriticalValues: Record<
       39: 0.154,
       40: 0.151,
     },
-    0.05: {
+    '5%': {
       2: 0.939,
       3: 0.798,
       4: 0.684,
@@ -255,7 +253,7 @@ const cochranCriticalValues: Record<
     },
   },
   5: {
-    0.01: {
+    '1%': {
       2: 0.959,
       3: 0.834,
       4: 0.721,
@@ -296,7 +294,7 @@ const cochranCriticalValues: Record<
       39: 0.131,
       40: 0.128,
     },
-    0.05: {
+    '5%': {
       2: 0.906,
       3: 0.746,
       4: 0.629,
@@ -339,7 +337,7 @@ const cochranCriticalValues: Record<
     },
   },
   6: {
-    0.01: {
+    '1%': {
       2: 0.937,
       3: 0.793,
       4: 0.676,
@@ -380,7 +378,7 @@ const cochranCriticalValues: Record<
       39: 0.116,
       40: 0.114,
     },
-    0.05: {
+    '5%': {
       2: 0.877,
       3: 0.707,
       4: 0.59,
