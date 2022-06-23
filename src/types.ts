@@ -11,4 +11,4 @@ export type AResult = {
 export type ReferenceResult = {
   value: number;
   method: string;
-} | null;
+};

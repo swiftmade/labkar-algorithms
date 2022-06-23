@@ -10,7 +10,7 @@ export function ReferenceValue(
     min: number;
     max: number;
   }>
-): ReferenceResult {
+): ReferenceResult | null {
 
   /* First, try to calculate using reference Formula */
   const referenceArray = Formula.filter((formula) => formula.is_reference);
