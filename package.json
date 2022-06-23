@@ -1,12 +1,13 @@
 {
   "name": "labkar-algorithms",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Labkar Algorithms",
   "main": "dist/lib.js",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "build": "rimraf dist && rollup -c"
+    "build": "rimraf dist && rollup -c",
+    "prepare": "npm run build"
   },
   "files": [
     "dist/*.js",
