@@ -8,10 +8,18 @@ export type AResult = {
   highLimit: number;
   lowLimit: number;
 };
+
+export enum CochranResult {
+  Outlier = 'outlier',
+  Straggler = 'straggler',
+  Correct = 'correct',
+}
+
 export type ReferenceResult = {
   value: number;
   method: string;
 };
+
 export type FormulaType = {
   is_reference: boolean;
   method: string;
