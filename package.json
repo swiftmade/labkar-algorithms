@@ -25,6 +25,7 @@
     "@types/jest": "^28.1.0",
     "@types/lodash": "^4.14.182",
     "babel-jest": "^28.1.0",
+    "esbuild": "^0.14.47",
     "jest": "^28.1.0",
     "nodemon": "^2.0.16",
     "rimraf": "^3.0.2",
