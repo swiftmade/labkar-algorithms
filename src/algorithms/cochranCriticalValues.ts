@@ -1,4 +1,7 @@
-const cochranCriticalValues = {
+const cochranCriticalValues: Record<
+  number,
+  Record<number, Record<number, number>>
+> = {
   2: {
     0.01: {
       2: 0,
@@ -416,7 +419,7 @@ const cochranCriticalValues = {
       37: 0.103,
       38: 0.101,
       39: 0.099,
-      40: 0.097
+      40: 0.097,
     },
   },
 };
