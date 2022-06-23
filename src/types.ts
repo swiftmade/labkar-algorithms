@@ -12,3 +12,10 @@ export type ReferenceResult = {
   value: number;
   method: string;
 };
+export type FormulaType = {
+  is_reference: boolean;
+  method: string;
+  formula: string;
+  min: number;
+  max: number;
+};

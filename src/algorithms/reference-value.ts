@@ -1,24 +1,17 @@
-import { ReferenceResult } from '../types';
+import { ReferenceResult, FormulaType } from '../types';
 const _ = require('lodash');
 
 export function ReferenceValue(
   x: number,
-  Formula: Array<{
-    is_reference: boolean;
-    method: string;
-    formula: string;
-    min: number;
-    max: number;
-  }>
+  Formula: FormulaType[]
 ): ReferenceResult | null {
-
   /* First, try to calculate using reference Formula */
   const referenceArray = Formula.filter((formula) => formula.is_reference);
   let formulaInRange = referenceArray.filter((r) => {
     return r.min <= x && r.max >= x;
   });
 
-  /* Second, if reference value is not found, try to calculate using non-reference Formula */ 
+  /* Second, if reference value is not found, try to calculate using non-reference Formula */
   if (formulaInRange.length === 0) {
     const notReferenceArray = Formula.filter(
       (formula) => formula.is_reference === false
@@ -43,7 +36,6 @@ export function ReferenceValue(
     };
   });
 
-  const result = _.maxBy(chainArray, 'value');
-
-  return result;
+  return _.maxBy(chainArray, 'value');
+  
 }
