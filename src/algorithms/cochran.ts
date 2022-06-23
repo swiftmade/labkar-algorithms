@@ -38,7 +38,7 @@ export function Cochran(values: Array<number[]>): CochranResult | null {
   const cValue = maxDeviation / sumOfSquareDeviations;
 
   if (cValue < fivePercentCriticalValue) {
-    return CochranResult.NonOutlier;
+    return CochranResult.Correct;
   }
 
   if (cValue < onePercentCriticalValue && cValue > fivePercentCriticalValue) {

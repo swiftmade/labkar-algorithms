@@ -11,9 +11,9 @@ export type AResult = {
 
 export enum CochranResult {
   Outlier = 'outlier',
-  Straggler = "straggler",
-  NonOutlier = "non-outlier"  
-};
+  Straggler = 'straggler',
+  Correct = 'correct',
+}
 
 export type ReferenceResult = {
   value: number;

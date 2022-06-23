@@ -35,7 +35,7 @@ describe('Cochran Algorithm', () => {
     ];
 
     const output = Cochran(samples);
-    expect(output).toBe(CochranResult.NonOutlier);
+    expect(output).toBe(CochranResult.Correct);
   });
 
   it('Cochran Algorithm Test (Null)', () => {
