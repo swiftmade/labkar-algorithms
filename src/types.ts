@@ -8,10 +8,22 @@ export type AResult = {
   highLimit: number;
   lowLimit: number;
 };
-export enum CochranResultType {
+
+export enum CochranResult {
   Outlier = 'outlier',
   Straggler = "straggler",
   NonOutlier = "non-outlier"  
 };
-/* export type CochranResult = 'outlier' | 'straggler' | 'not-outlier' | null; */
-export type CochranResult = CochranResultType;
+
+export type ReferenceResult = {
+  value: number;
+  method: string;
+};
+
+export type FormulaType = {
+  is_reference: boolean;
+  method: string;
+  formula: string;
+  min: number;
+  max: number;
+};

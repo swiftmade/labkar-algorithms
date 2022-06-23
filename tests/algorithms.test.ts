@@ -1,6 +1,115 @@
-import { MADe, M_Estimator, Q, Hampel, A_Algorithm, Cochran } from '../src/lib';
+import {
+  MADe,
+  M_Estimator,
+  Q,
+  Hampel,
+  A_Algorithm,
+  Cochran,
+  ReferenceValue,
+} from '../src/lib';
+
 
 describe('Algorithms', () => {
+  it('Reference Value (CASE1: x value is not range)', () => {
+    let x = 0.4;
+    const formulae = [
+      {
+        formula: '0.075*X+4.6',
+        method: 'TS EN 13132',
+        min: 60.1,
+        max: 500.0,
+        is_reference: true,
+      },
+      {
+        formula: '0.016*X+3.70 ',
+        method: 'TS EN ISO 13032',
+        min: 8.0,
+        max: 50.0,
+        is_reference: true,
+      },
+      {
+        formula: '0.6*X',
+        method: 'ASTM D381',
+        min: 1.0,
+        max: 30.0,
+        is_reference: false,
+      },
+    ];
+    const output = ReferenceValue(x, formulae);
+
+    expect(output).toBe(null);
+  });
+
+  it('Reference Value (CASE2: is not reference array)', () => {
+    let x = 0.4;
+    const formulae = [
+      {
+        formula: '0.075*X+4.6',
+        method: 'TS EN 13132',
+        min: 60.1,
+        max: 500.0,
+        is_reference: false,
+      },
+      {
+        formula: '0.016*X+3.70 ',
+        method: 'TS EN ISO 13032',
+        min: 8.0,
+        max: 50.0,
+        is_reference: false,
+      },
+      {
+        formula: '0.6*X',
+        method: 'ASTM D381',
+        min: 1.0,
+        max: 30.0,
+        is_reference: false,
+      },
+    ];
+    let output = ReferenceValue(x, formulae);
+    expect(output).toBe(null);
+
+    x = 10;
+    output = ReferenceValue(x, formulae);
+
+    expect(output?.value).toBeCloseTo(6, 3);
+    expect(output?.method).toBe('ASTM D381');
+  });
+
+  it('Reference Value (CASE3: is reference array)', () => {
+    let x = 0.4;
+    const formulae = [
+      {
+        formula: '0.075*X+4.6',
+        method: 'TS EN 13132',
+        min: 60.1,
+        max: 500.0,
+        is_reference: true,
+      },
+      {
+        formula: '0.016*X+3.70 ',
+        method: 'TS EN ISO 13032',
+        min: 8.0,
+        max: 50.0,
+        is_reference: true,
+      },
+      {
+        formula: '0.6*X',
+        method: 'ASTM D381',
+        min: 1.0,
+        max: 30.0,
+        is_reference: false,
+      },
+    ];
+    let output = ReferenceValue(x, formulae);
+    expect(output).toBe(null);
+
+    x = 10;
+    output = ReferenceValue(x, formulae);
+
+    expect(output?.value).toBeCloseTo(3.86, 3);
+    expect(output?.method).toBe('TS EN ISO 13032');
+  });
+
   it('A algorithm', () => {
     const samples = [
       0.04, 0.055, 0.178, 0.202, 0.206, 0.227, 0.228, 0.23, 0.23, 0.235, 0.236,
