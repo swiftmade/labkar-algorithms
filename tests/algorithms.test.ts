@@ -65,7 +65,7 @@ describe('Algorithms', () => {
     expect(output.value).toBeCloseTo(44.722, 3);
   });
 
-  it('Cochran Algorithm Test', () => {
+  it('Cochran Algorithm Test (Outlier)', () => {
     const samples = [
       [91, 89.6],
       [89.7, 89.8],
@@ -85,7 +85,28 @@ describe('Algorithms', () => {
     ];
 
     const output = Cochran(samples);
-
-    expect(output).toBe('not-outlier');
+    expect(output).toBe('outlier');
   });
+
+  it('Cochran Algorithm Test (Correct)', () => {
+    const samples = [
+      [73, 45],
+      [22, 26],
+      [12, 42],
+      [42, 20],
+      [21, 30],
+    ];
+
+    const output = Cochran(samples);
+    expect(output).toBe('non-outlier');
+  });
+  it('Cochran Algorithm Test (Null)', () => {
+    const samples = [[73, 45]];
+
+    const output = Cochran(samples);
+    expect(output).toBe(null);
+  });
+
+  //TODO: implement cochran algorithm test (straggler) - Any value considered as straggler
+
 });
