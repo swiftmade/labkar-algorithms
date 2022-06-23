@@ -3,17 +3,17 @@ const _ = require('lodash');
 
 export function ReferenceValue(
   x: number,
-  Formula: FormulaType[]
+  formulae: FormulaType[]
 ): ReferenceResult | null {
   /* First, try to calculate using reference Formula */
-  const referenceArray = Formula.filter((formula) => formula.is_reference);
+  const referenceArray = formulae.filter((formula) => formula.is_reference);
   let formulaInRange = referenceArray.filter((r) => {
     return r.min <= x && r.max >= x;
   });
 
   /* Second, if reference value is not found, try to calculate using non-reference Formula */
   if (formulaInRange.length === 0) {
-    const notReferenceArray = Formula.filter(
+    const notReferenceArray = formulae.filter(
       (formula) => formula.is_reference === false
     );
 
