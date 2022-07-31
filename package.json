@@ -1,6 +1,6 @@
 {
   "name": "labkar-algorithms",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Labkar Algorithms",
   "main": "dist/lib.js",
   "scripts": {

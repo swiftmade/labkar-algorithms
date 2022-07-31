@@ -14,7 +14,7 @@ export function ReferenceValue(
   /* Second, if reference value is not found, try to calculate using non-reference Formula */
   if (formulaInRange.length === 0) {
     const notReferenceArray = formulae.filter(
-      (formula) => formula.is_reference === false
+      (formula) => !formula.is_reference
     );
 
     formulaInRange = notReferenceArray.filter((r) => {
@@ -37,5 +37,4 @@ export function ReferenceValue(
   });
 
   return _.maxBy(chainArray, 'value');
-  
 }
