@@ -18,13 +18,12 @@ export function grubbs(
 ): GrubbsResult[] {
   if (typeof originDataSet === 'undefined') {
     throw new Error('dataSet MUST be passed');
-  }
-  if (originDataSet.filter(isValidData).length > 100) {
-    throw new Error('dataSet.length MUST less than 100');
-  }
-  if (originDataSet.filter(isValidData).length <= 2) {
+  } else if (originDataSet.filter(isValidData).length > 500) {
+    throw new Error('dataSet.length MUST less than 500');
+  } else if (originDataSet.filter(isValidData).length <= 2) {
     throw new Error('dataSet.length MUST greater than 2');
   }
+
   // defaultOptions
   var options = {
     alpha: 0.01,
