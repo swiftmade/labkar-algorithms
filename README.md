@@ -1,18 +1,21 @@
 # Labkar Algorithms
 
-This repo contain labkar algorithms functions.
+This repo contains LABKAR statistical calculation algorithms.
 
-## Installation
-
-Firstly, install dependency.
+## Development
 
 ```bash
 npm install
-```
 
-## Watch & Development
+# Run the tests
+npm run test
 
-```javascript
-npm run start
-npm run start:dev
+# Run the tests in watch mode
+npm run test:watch
+
+# Build
+npm run build
+
+# Publish
+npm publish
 ```
