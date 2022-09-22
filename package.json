@@ -1,8 +1,10 @@
 {
   "name": "labkar-algorithms",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "Labkar Algorithms",
   "main": "dist/lib.js",
+  "author": "ODTÜ PAL",
+  "license": "BSD-3-Clause",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
@@ -39,8 +41,6 @@
     "type": "git",
     "url": "git+https://github.com/swiftmade/labkar-algorithms.git"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/swiftmade/labkar-algorithms/issues"
   },
