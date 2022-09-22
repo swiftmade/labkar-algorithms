@@ -16,6 +16,20 @@ describe('Algorithms', () => {
     expect(output.highLimit).toBeCloseTo(0.3163, 3);
   });
 
+  it('A algoritm (v2)', () => {
+    const samples = [
+      0, 348, 370, 385, 388, 422, 422, 426, 427, 443, 466, 480, 481, 499, 500,
+      525, 562, 612,
+    ];
+
+    const output = A_Algorithm(samples);
+
+    expect(output.robust).toBeCloseTo(444.6199, 4);
+    expect(output.robustDeviation).toBeCloseTo(72.825, 4);
+    expect(output.lowLimit).toBeCloseTo(335.3824, 4);
+    expect(output.highLimit).toBeCloseTo(553.8575, 4);
+  });
+
   it('MADe Method', () => {
     const samples = [13.9, 14.12, 13.65];
     const output = MADe(samples);
