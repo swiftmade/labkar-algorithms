@@ -1,8 +1,8 @@
 import { median, average, sampleStandardDeviation } from 'simple-statistics';
 import { AResult } from '../types';
 
-const MAX_ITERATIONS = 10;
-const SIGNIFICANT_FIGURES = 5;
+const MAX_ITERATIONS = 100;
+const SIGNIFICANT_FIGURES = 3;
 
 type IterationProps = {
   number: number; // Number of iteration
@@ -43,8 +43,6 @@ function iterate(props: IterationProps): AResult {
     return props.lastResult;
   }
 
-  console.log('new iteration: ' + props.number);
-
   // Replace values outside of low/high limits
   const values = props.values.map((value) => {
     if (value < props.lastResult.lowLimit) {
@@ -81,8 +79,7 @@ function iterate(props: IterationProps): AResult {
 
   // Otherwise keep iterating...
   return iterate({
-    // TODO: Decide whether to use values or props.values
-    // Use the original values
+    // Always use the original values to compare to min/max
     values: props.values,
     // Increment the number of iterations
     number: props.number + 1,
