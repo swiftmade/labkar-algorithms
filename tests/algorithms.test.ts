@@ -10,10 +10,24 @@ describe('Algorithms', () => {
     ];
     const output = A_Algorithm(samples);
 
-    expect(output.robust).toBeCloseTo(0.262, 3);
-    expect(output.robustDeviation).toBeCloseTo(0.0386, 3);
-    expect(output.lowLimit).toBeCloseTo(0.2042, 3);
-    expect(output.highLimit).toBeCloseTo(0.3198, 3);
+    expect(output.robust).toBeCloseTo(0.257, 3);
+    expect(output.robustDeviation).toBeCloseTo(0.0395, 3);
+    expect(output.lowLimit).toBeCloseTo(0.1977, 3);
+    expect(output.highLimit).toBeCloseTo(0.3163, 3);
+  });
+
+  it('A algoritm (makarna)', () => {
+    const samples = [
+      0, 348, 370, 385, 388, 422, 422, 426, 427, 443, 466, 480, 481, 499, 500,
+      525, 562, 612,
+    ];
+
+    const output = A_Algorithm(samples);
+
+    expect(output.robust).toBeCloseTo(446.4999, 4);
+    expect(output.robustDeviation).toBeCloseTo(77.6405, 3);
+    expect(output.lowLimit).toBeCloseTo(330.0392, 4);
+    expect(output.highLimit).toBeCloseTo(562.9606, 4);
   });
 
   it('MADe Method', () => {

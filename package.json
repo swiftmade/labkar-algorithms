@@ -1,8 +1,18 @@
 {
   "name": "labkar-algorithms",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "Labkar Algorithms",
   "main": "dist/lib.js",
+  "author": "ODTÜ PAL",
+  "license": "BSD-3-Clause",
+  "homepage": "https://pal.metu.edu.tr",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swiftmade/labkar-algorithms.git"
+  },
+  "bugs": {
+    "url": "https://github.com/swiftmade/labkar-algorithms/issues"
+  },
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watchAll",
@@ -27,22 +37,11 @@
     "babel-jest": "^28.1.0",
     "esbuild": "^0.14.47",
     "jest": "^28.1.0",
-    "nodemon": "^2.0.16",
     "rimraf": "^3.0.2",
     "rollup": "^2.75.6",
     "rollup-plugin-dts": "^4.2.2",
     "rollup-plugin-esbuild": "^4.9.1",
     "ts-jest": "^28.0.4",
     "typescript": "^4.7.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/swiftmade/labkar-algorithms.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/swiftmade/labkar-algorithms/issues"
-  },
-  "homepage": "https://github.com/swiftmade/labkar-algorithms#readme"
+  }
 }
