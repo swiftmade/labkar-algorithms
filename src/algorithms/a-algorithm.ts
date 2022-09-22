@@ -83,7 +83,7 @@ function iterate(props: IterationProps): AResult {
   return iterate({
     // TODO: Decide whether to use values or props.values
     // Use the original values
-    values: values,
+    values: props.values,
     // Increment the number of iterations
     number: props.number + 1,
     lastResult: result,

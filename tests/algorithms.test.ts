@@ -10,7 +10,7 @@ describe('Algorithms', () => {
     ];
     const output = A_Algorithm(samples);
 
-    expect(output.robust).toBeCloseTo(0.257, 2);
+    expect(output.robust).toBeCloseTo(0.257, 3);
     expect(output.robustDeviation).toBeCloseTo(0.0395, 3);
     expect(output.lowLimit).toBeCloseTo(0.1977, 3);
     expect(output.highLimit).toBeCloseTo(0.3163, 3);
