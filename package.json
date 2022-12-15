@@ -1,6 +1,6 @@
 {
   "name": "labkar-algorithms",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "description": "Labkar Algorithms",
   "main": "dist/lib.js",
   "author": "ODTÜ PAL",
