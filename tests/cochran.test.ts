@@ -1,5 +1,4 @@
 import { Cochran } from '../src/lib';
-import { CochranResult } from '../src/types';
 
 describe('Cochran Algorithm', () => {
   it('Cochran Algorithm Test (Outlier)', () => {
@@ -21,21 +20,35 @@ describe('Cochran Algorithm', () => {
       [88.8, 85],
     ];
 
-    const output = Cochran(samples);
-    expect(output).toBe(CochranResult.Outlier);
+    let output = Cochran(samples, { alpha: 0.05 });
+    expect(output?.maxDeviation).toBeCloseTo(31.205, 3);
+    expect(output?.cPairIndex).toBe(11);
+    expect(output?.cPair).toEqual([91, 83.1]);
+    expect(output?.outlier).toBe(true);
+
+    output = Cochran(samples, { alpha: 0.01 });
+    expect(output?.outlier).toBe(true);
   });
 
-  it('Cochran Algorithm Test (Correct)', () => {
+  it.only('Cochran Algorithm Test (Straggler)', () => {
     const samples = [
-      [73, 45],
-      [22, 26],
-      [12, 42],
-      [42, 20],
-      [21, 30],
+      [9.9, 10.2],
+      [10.4, 9.5],
+      [10, 10],
+      [10, 10],
+      [10.2, 10.3],
+      [9.5, 9.9],
+      [10.5, 10.1],
+      [10.1, 10.3],
+      [10, 10.1],
+      [10.2, 10],
     ];
 
-    const output = Cochran(samples);
-    expect(output).toBe(CochranResult.Correct);
+    let output = Cochran(samples);
+    expect(output?.outlier).toBe(true);
+
+    output = Cochran(samples, { alpha: 0.01 });
+    expect(output?.outlier).toBe(false);
   });
 
   it('Cochran Algorithm Test (Null)', () => {
