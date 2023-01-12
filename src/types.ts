@@ -11,23 +11,11 @@ export type AResult = {
 };
 
 export type CochranResult = {
-  outlier: boolean;
+  hasOutliers: boolean;
   /**
-   * Value used to compare to the elected critical value
+   * Indexes of outliers across all tests
    */
-  cValue: number;
-  /**
-   * The pair used to calculate the max deviation
-   */
-  cPair: number[];
-  /**
-   * Index of the pair used to calculate the max deviation
-   */
-  cPairIndex: number;
-  /**
-   * Maximum value among (stdDev(pair) ^ 2)
-   */
-  maxDeviation: number;
+  outlierIndexes: number[];
 };
 
 export type ReferenceResult = {

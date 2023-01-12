@@ -3,10 +3,27 @@ import { CochranResult } from '../types';
 import { sampleStandardDeviation } from 'simple-statistics';
 import cochranCriticalValues from './cochranCriticalValues';
 
+type CochranOptions = {
+  alpha: number;
+  originalIndexes?: number[];
+  outlierIndexes?: number[];
+}
+
 export function Cochran(
   values: Array<number[]>,
-  options: { alpha: number } = { alpha: 0.05 }
+  options: CochranOptions = { alpha: 0.05 }
 ): CochranResult | null {
+
+  // Keep track of original indexes of values at the beginning
+  // When we return indexes of outliers, this will be useful.
+  const originalIndexes = options.originalIndexes
+    ? options.originalIndexes
+    : values.map((_, i) => i);
+
+  // This is where we store outlier indexes across all iterations.
+  // The indexes are relative to the original array.
+  const outlierIndexes = options.outlierIndexes ? options.outlierIndexes : [];
+
   /* p -> numune sayısı  */
   const pValue = values.length;
 
@@ -33,25 +50,24 @@ export function Cochran(
 
   // These are the values used to calculate max deviation
   const cPairIndex = squareDeviations.indexOf(maxDeviation);
-  const cPair = values[squareDeviations.indexOf(maxDeviation)];
-
   const cValue = maxDeviation / sumOfSquareDeviations;
 
   if (cValue < criticalValue) {
     return {
-      outlier: false,
-      cValue,
-      cPair,
-      cPairIndex: cPairIndex,
-      maxDeviation,
+      outlierIndexes,
+      hasOutliers: outlierIndexes.length > 0,
     };
   }
 
-  return {
-    outlier: true,
-    cValue,
-    cPair,
-    cPairIndex,
-    maxDeviation,
-  };
+  outlierIndexes.push(originalIndexes[cPairIndex]);
+  originalIndexes.splice(cPairIndex, 1);
+
+  return Cochran(
+    values.filter((_, i) => i !== cPairIndex),
+    {
+      alpha: options.alpha,
+      originalIndexes,
+      outlierIndexes
+    }
+  )
 }

@@ -21,16 +21,15 @@ describe('Cochran Algorithm', () => {
     ];
 
     let output = Cochran(samples, { alpha: 0.05 });
-    expect(output?.maxDeviation).toBeCloseTo(31.205, 3);
-    expect(output?.cPairIndex).toBe(11);
-    expect(output?.cPair).toEqual([91, 83.1]);
-    expect(output?.outlier).toBe(true);
+    expect(output?.hasOutliers).toBe(true);
+    expect(output?.outlierIndexes).toEqual([11]);
 
     output = Cochran(samples, { alpha: 0.01 });
-    expect(output?.outlier).toBe(true);
+    expect(output?.hasOutliers).toBe(true);
+    expect(output?.outlierIndexes).toEqual([11]);
   });
 
-  it.only('Cochran Algorithm Test (Straggler)', () => {
+  it('Cochran Algorithm Test (Straggler)', () => {
     const samples = [
       [9.9, 10.2],
       [10.4, 9.5],
@@ -45,10 +44,10 @@ describe('Cochran Algorithm', () => {
     ];
 
     let output = Cochran(samples);
-    expect(output?.outlier).toBe(true);
+    expect(output?.hasOutliers).toBe(true);
 
     output = Cochran(samples, { alpha: 0.01 });
-    expect(output?.outlier).toBe(false);
+    expect(output?.hasOutliers).toBe(false);
   });
 
   it('Cochran Algorithm Test (Null)', () => {
@@ -58,7 +57,23 @@ describe('Cochran Algorithm', () => {
     expect(output).toBe(null);
   });
 
-  it.todo('Cochran Algorithm Test (Straggler)');
+  it('Repeats test until there are no outliers', () => {
 
-  //TODO: Any value considered as straggler
+    const samples = [
+      [0.135, 0.194], // index=0 = outlier
+      [0.187, 0.189],
+      [0.182, 0.186],
+      [0.188, 0.196],
+      [0.191, 0.181],
+      [0.188, 0.018], // index=5 = outlier
+      [0.187, 0.196],
+      [0.177, 0.186],
+      [0.179, 0.187],
+      [0.188, 0.196],
+    ]
+
+    const output = Cochran(samples, { alpha: 0.01 });
+    expect(output?.outlierIndexes).toContain(0);
+    expect(output?.outlierIndexes).toContain(5);
+  })
 });
