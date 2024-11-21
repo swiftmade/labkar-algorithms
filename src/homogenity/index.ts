@@ -29,8 +29,8 @@ export function homogenity(results: HomogenityTestResult[], r: number) {
   if (results[0].values.length !== 2) {
     throw new Error(
       'We currently only support two values per test. You provided ' +
-      results[0].values.length +
-      ' values.'
+        results[0].values.length +
+        ' values.'
     );
   }
 
@@ -43,7 +43,7 @@ export function homogenity(results: HomogenityTestResult[], r: number) {
     deltaPow: Math.pow(Math.abs(result.values[0] - result.values[1]), 2),
   }));
 
-  const xAvg = average(enrichedResults.map((r) => r.avg))
+  const xAvg = average(enrichedResults.map((r) => r.avg));
 
   const sd = round(
     sampleStandardDeviation(enrichedResults.map((r) => r.avg)),
@@ -78,6 +78,8 @@ export function homogenity(results: HomogenityTestResult[], r: number) {
     sw,
     ss2,
     ss,
+    fValues,
+    sigmaAllow2,
     c,
     cSqrt,
     homogenity,
