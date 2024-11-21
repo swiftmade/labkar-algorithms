@@ -10,5 +10,6 @@ export * from './algorithms/cochran';
 
 export * from './algorithms/reference-value';
 
-
 export * from './grubbs';
+
+export * from './homogenity';
