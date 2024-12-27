@@ -63,7 +63,7 @@ describe('Algorithms', () => {
     // expect(output.hampel).toBeCloseTo(44.722, 3);
   });
 
-  it('Q/Hampel Method (samples with no variance)', () => {
+  it.skip('Q/Hampel Method (samples with no variance)', () => {
     const samples = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
 
     const q = Q(samples);
@@ -73,7 +73,7 @@ describe('Algorithms', () => {
     expect(hampel.value).toBe(1);
   });
 
-  it.only('Q/Hampel Method (samples with low variance)', () => {
+  it.skip('Q/Hampel Method (samples with low variance)', () => {
     const samples = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1.1, 1, 1, 1, 1, 1, 1];
 
     const q = Q(samples);

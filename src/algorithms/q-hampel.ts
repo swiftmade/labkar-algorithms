@@ -45,8 +45,6 @@ export function Q(
   const sortedUniqueDeltas = sortedUniq(sortedDeltas);
   const hMultiplier = 2 / (results.length * (results.length - 1));
 
-  console.log(JSON.stringify({ sortedDeltas, sortedUniqueDeltas }, null, 2));
-
   const calculations: Q_Calculation[] = [];
 
   for (let i = 0; i < sortedUniqueDeltas.length; i++) {
@@ -63,8 +61,6 @@ export function Q(
       g: calculateG(i, h1, get(calculations, i - 1 + '.h1')),
     });
   }
-
-  console.log(calculations);
 
   // START OF Q Calc.
   const firstParameter = calculations[0].h1 * 0.75 + 0.25;
