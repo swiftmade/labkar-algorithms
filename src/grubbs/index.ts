@@ -1,4 +1,4 @@
-import { average, standardDeviation } from 'simple-statistics';
+import { average, sampleStandardDeviation } from 'simple-statistics';
 import criticalValueTable from './criticalValueTable';
 
 export type GrubbsResult = {
@@ -17,7 +17,7 @@ export function grubbs(
   originOptions: { alpha: number }
 ): GrubbsResult[] {
   if (typeof originDataSet === 'undefined') {
-    throw new Error('dataSet MUST be passed');
+    throw new Error('dataSet MUST be passed');
   } else if (originDataSet.filter(isValidData).length > 500) {
     throw new Error('dataSet.length MUST less than 500');
   } else if (originDataSet.filter(isValidData).length <= 2) {
@@ -58,7 +58,7 @@ export function grubbs(
     done = true;
     currentRound = {};
     currentRound.dataSet = dataSet.slice();
-    currentRound.stdev = standardDeviation(
+    currentRound.stdev = sampleStandardDeviation(
       currentRound.dataSet.filter(isValidData)
     );
     currentRound.average =

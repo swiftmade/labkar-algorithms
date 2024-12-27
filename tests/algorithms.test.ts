@@ -63,6 +63,26 @@ describe('Algorithms', () => {
     // expect(output.hampel).toBeCloseTo(44.722, 3);
   });
 
+  it('Q/Hampel Method (samples with no variance)', () => {
+    const samples = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+
+    const q = Q(samples);
+    const hampel = Hampel(samples, q.value);
+
+    expect(q.value).toBe(1);
+    expect(hampel.value).toBe(1);
+  });
+
+  it.only('Q/Hampel Method (samples with low variance)', () => {
+    const samples = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1.1, 1, 1, 1, 1, 1, 1];
+
+    const q = Q(samples);
+    const hampel = Hampel(samples, q.value);
+
+    expect(q.value).toBeCloseTo(1.0040785270846, 4);
+    expect(hampel.value).toBeCloseTo(0.040785270845889, 4);
+  });
+
   it('Hampel Method', () => {
     const samples = [
       41.41, 39.22, 47.29, 82.46, 45.24, 49.96, 38.2, 45.41, 39.82, 48.17,

@@ -1,6 +1,6 @@
 const { jStat } = require('jstat');
 import { median } from 'simple-statistics';
-import { get, sortBy, sumBy, round, sortedUniq, findIndex } from 'lodash';
+import { get, sortBy, sumBy, round, sortedUniq, findIndex, uniq } from 'lodash';
 
 import { Result } from '../types';
 
@@ -22,6 +22,15 @@ export function Q(
 ): Result {
   const { precision } = options;
 
+  if (!results.length) {
+    throw new Error('At least one test result is required to calculate Q');
+  }
+
+  // If all values are the same, return the first value
+  if (uniq(results).length === 1) {
+    return { value: results[0] };
+  }
+
   const values: number[] = ([] as number[]).concat(results).sort();
 
   let deltas = [];
@@ -35,6 +44,8 @@ export function Q(
   const sortedDeltas = sortBy(deltas);
   const sortedUniqueDeltas = sortedUniq(sortedDeltas);
   const hMultiplier = 2 / (results.length * (results.length - 1));
+
+  console.log(JSON.stringify({ sortedDeltas, sortedUniqueDeltas }, null, 2));
 
   const calculations: Q_Calculation[] = [];
 
@@ -52,6 +63,8 @@ export function Q(
       g: calculateG(i, h1, get(calculations, i - 1 + '.h1')),
     });
   }
+
+  console.log(calculations);
 
   // START OF Q Calc.
   const firstParameter = calculations[0].h1 * 0.75 + 0.25;
