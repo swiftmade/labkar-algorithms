@@ -76,4 +76,19 @@ describe('Cochran Algorithm', () => {
     expect(output?.outlierIndexes).toContain(0);
     expect(output?.outlierIndexes).toContain(5);
   })
+
+  it('Cochran Algorithm Test (New Values)', () => {
+    const samples = [
+      [1, 1],
+      [1, 1],
+      [1, 1],
+      [1, 1],
+      [1, 1],
+      [1, 1],
+      [1, 1],
+    ];
+
+    const output = Cochran(samples);
+    expect(output?.hasOutliers).toBe(false); // Adjust the expectation based on your algorithm's behavior
+  });
 });
