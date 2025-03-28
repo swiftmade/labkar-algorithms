@@ -7,12 +7,24 @@ type CochranOptions = {
   alpha: number;
   originalIndexes?: number[];
   outlierIndexes?: number[];
-}
+};
 
 export function Cochran(
   values: Array<number[]>,
   options: CochranOptions = { alpha: 0.05 }
 ): CochranResult | null {
+  // Early return if all values are identical
+  const allIdentical = values.every(
+    (sample) =>
+      sample.every((value) => value === sample[0]) && sample[0] === values[0][0]
+  );
+
+  if (allIdentical) {
+    return {
+      outlierIndexes: [],
+      hasOutliers: false,
+    };
+  }
 
   // Keep track of original indexes of values at the beginning
   // When we return indexes of outliers, this will be useful.
@@ -67,7 +79,7 @@ export function Cochran(
     {
       alpha: options.alpha,
       originalIndexes,
-      outlierIndexes
+      outlierIndexes,
     }
-  )
+  );
 }
